@@ -12,11 +12,8 @@ import (
 )
 
 func main() {
-	input, err := bikeshed.Read(1)
+	input := bikeshed.Read(1)
 	defer input.Close()
-	if err != nil {
-		log.Fatalf("could not read day 1 input: %v", err)
-	}
 	result, err := solve2(parseInput(input))
 	if err != nil {
 		log.Fatalf("could not solve input: %v", err)
