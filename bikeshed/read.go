@@ -1,6 +1,7 @@
 package bikeshed
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"log"
@@ -8,6 +9,7 @@ import (
 	"net/http/cookiejar"
 	"net/url"
 	"os"
+	"strconv"
 )
 
 // Read reads the input from AOC for the provided day.
@@ -36,4 +38,17 @@ func Read(day int) io.ReadCloser {
 		return nil
 	}
 	return resp.Body
+}
+
+func ParseIntList(reader io.Reader) []int {
+	var result []int
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		i, err := strconv.Atoi(scanner.Text())
+		if err != nil {
+			panic("not an integer!")
+		}
+		result = append(result, i)
+	}
+	return result
 }
